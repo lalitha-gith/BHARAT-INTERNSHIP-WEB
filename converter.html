@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            background-image: url(https://png.pngtree.com/thumb_back/fh260/back_our/20190628/ourmid/pngtree-simple-atmospheric-blue-temperature-needle-illustration-background-image_279280.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            margin-left: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-group input[type="submit"] {
+            margin-left: 0;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function conv(event) {
+            event.preventDefault();
+
+            const celInput = document.getElementById("cel");
+            const fahInput = document.getElementById("fah");
+            const kelInput = document.getElementById("kel");
+
+            const celValue = parseFloat(celInput.value);
+            const fahValue = parseFloat(fahInput.value);
+            const kelValue = parseFloat(kelInput.value);
+
+            if (!isNaN(celValue)) {
+                const fah = celValue * 1.8 + 32;
+                const kel = celValue + 273.15;
+                fahInput.value = fah.toFixed(2);
+                kelInput.value = kel.toFixed(2);
+            } else if (!isNaN(fahValue)) {
+                const cel = (fahValue - 32) / 1.8;
+                const kel = cel + 273.15;
+                celInput.value = cel.toFixed(2);
+                kelInput.value = kel.toFixed(2);
+            } else if (!isNaN(kelValue)) {
+                const cel = kelValue - 273.15;
+                const fah = cel * 1.8 + 32;
+                celInput.value = cel.toFixed(2);
+                fahInput.value = fah.toFixed(2);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <form onsubmit="conv(event)">
+            <div class="input-group">
+                <label for="cel">Celsius:</label>
+                <input class="inpu" type="text" id="cel" name="cel" value="" />
+            </div>
+            <div class="input-group">
+                <label for="fah">Fahrenheit:</label>
+                <input class="inpu" type="text" id="fah" name="fah" value="" />
+            </div>
+            <div class="input-group">
+                <label for="kel">Kelvin:</label>
+                <input class="inpu" type="text" id="kel" name="kel" value="" />
+            </div>
+            <div class="input-group">
+                
+                <input class="submit-button" type="submit" value="Convert" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
